@@ -5,8 +5,7 @@
 >> list
 >>> arraylist
 >>>> implementation
-`ArrayList.java`
-`ArrayListExample.java`
+>>>>> `ArrayList.java`, `ArrayListExample.java`
 
 ## ArrayList
 ### 개념
