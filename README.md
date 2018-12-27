@@ -5,8 +5,7 @@
 >> list
 >>> arraylist
 >>>> implementation
->>>>> ArrayList.java
->>>>> ArrayListExample.java
+>>>>> `ArrayList.java`, `ArrayListExample.java`
 
 ## ArrayList
 ### 개념
@@ -23,5 +22,3 @@
  - 값 가져오기 : **변수명.get(인덱스);**
  - 엘리먼트 개수 확인 : **변수명.size();**
  - 문자열로 변환 : **변수명.toString();**
-
- ## ArrayList
