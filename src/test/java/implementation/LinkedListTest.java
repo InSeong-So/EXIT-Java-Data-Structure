@@ -1,6 +1,6 @@
-package list.linkedlist.implementation;
+package implementation;
 
-public class Main {
+public class LinkedListTest {
 
 	public static void main(String[] args) {
 		LinkedList numbers = new LinkedList();
@@ -9,7 +9,7 @@ public class Main {
 		numbers.addLast(20);
 		numbers.addLast(30);
 
-		System.out.println(numbers.removeFirst());
+		System.out.println(numbers.node(0));
 		
 		System.out.println(numbers);
 	}

@@ -1,4 +1,4 @@
-package list.linkedlist.implementation;
+package implementation;
 
 public class LinkedList {
 
@@ -83,7 +83,7 @@ public class LinkedList {
 
 		return str + "]";
 	}
-	
+
 	public Object removeFirst() {
 		Node temp = head;
 		head = head.next;
@@ -92,4 +92,33 @@ public class LinkedList {
 		size--;
 		return returnData;
 	}
+
+	public Object remove(int index) {
+		if (index == 0) {
+			return removeFirst();
+		}
+		Node temp = node(index - 1);
+		Node todoDeleted = temp.next;
+		temp.next = temp.next.next;
+		Object returnData = todoDeleted.data;
+		if (todoDeleted == tail) {
+			tail = temp;
+		}
+		size--;
+		return returnData;
+	}
+
+	public Object removeLast() {
+		return remove(size - 1);
+	}
+	
+	public int size() {
+		return size;
+	}
+	
+	public Object get(int index) {
+		Node temp = node(index);
+		return temp.data;
+	}
+
 }

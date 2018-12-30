@@ -1,9 +1,9 @@
-package list.arraylist.implementation;
+package implementation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ArrayListExample {
+public class ArrayListTest {
 
 	public static void main(String[] args) {
 		ArrayList<Integer> list = new ArrayList<Integer>();
