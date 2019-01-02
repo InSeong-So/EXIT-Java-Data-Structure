@@ -22,7 +22,6 @@ public class Sort {
 		} while (numbersSwitched);
 	}
 
-	
 	// 삽입 정렬 알고리즘
 	public List<Integer> insertSort(List<Integer> numbers) {
 		List<Integer> sortedList = new LinkedList<>();
@@ -64,7 +63,6 @@ public class Sort {
 		return sorted;
 	}
 
-	
 	// 병합 정렬 알고리즘
 	public List<Integer> mergeSort(List<Integer> values) {
 		if (values.size() < 2) {

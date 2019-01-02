@@ -111,14 +111,97 @@ public class LinkedList {
 	public Object removeLast() {
 		return remove(size - 1);
 	}
-	
+
 	public int size() {
 		return size;
 	}
-	
+
 	public Object get(int index) {
 		Node temp = node(index);
 		return temp.data;
 	}
+
+	public int indexOf(Object input) {
+		Node temp = head;
+		int index = 0;
+		while (temp.data != input) {
+			temp = temp.next;
+			index++;
+			if (temp == null) {
+				return -1;
+			}
+		}
+		return index;
+	}
+
+	public ListIterator listIterator() {
+
+		return new ListIterator();
+	}
+
+	class ListIterator {
+		private Node next;
+		private Node lastReturned;
+		private int nextIndex;
+
+		ListIterator() {
+			next = head;
+		}
+
+		public Object next() {
+			lastReturned = next;
+			next = next.next;
+			nextIndex++;
+			return lastReturned.data;
+		}
+
+		public boolean hasNext() {
+			return nextIndex < size();
+		}
+
+		public void add(Object input) {
+			Node newNode = new Node(input);
+
+			if (lastReturned == null) {
+				head = newNode;
+				newNode.next = next;
+			} else {
+				lastReturned.next = newNode;
+				newNode.next = next;
+			}
+
+			lastReturned = newNode;
+			nextIndex++;
+			size++;
+		}
+
+		public void remove() {
+//			효율적이지 않은 코드, 내부적으로 노드를 찾는 동작을 다시 한번 하게 됨
+//			if (nextIndex == 0) {
+//				throw new IllegalStateException();
+//			}
+//			LinkedList.this.remove(nextIndex - 1);
+//			nextIndex--;
+		}
+	}
+
+	// 중복되고 정렬되지 않은 링크드 리스트를 정렬시키고 중복을 제거하기
+	// 고정된 포인터 방법, 시간은 더 많이 들지만 공간 효율성이 좋다.
+	public void removeDups() {
+		Node newNode = head;
+		while (newNode == null && newNode.next != null) {
+			Node runner = newNode;
+			while (runner.next != null) {
+				if (newNode.data == runner.next.data) {
+					runner.next = runner.next.next;
+				} else {
+					runner = runner.next;
+				}
+			}
+			newNode = newNode.next;
+		}
+	}
+
+	// 단방향 링크드 리스트의 끝에서 n번째 노드를 찾는 알고리즘 구현
 
 }
