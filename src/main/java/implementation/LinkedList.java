@@ -1,6 +1,6 @@
 package implementation;
 
-public class LinkedList {
+public class LinkedList<T> {
 
 	private Node head;
 	private Node tail;
