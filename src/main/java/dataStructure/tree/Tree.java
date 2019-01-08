@@ -1,4 +1,4 @@
-package implementation;
+package dataStructure.tree;
 
 /*
 		(1)

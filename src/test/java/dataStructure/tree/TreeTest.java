@@ -1,6 +1,9 @@
-package implementation;
+package dataStructure.tree;
 
 import org.junit.Test;
+
+import dataStructure.tree.Node;
+import dataStructure.tree.Tree;
 
 public class TreeTest {
 

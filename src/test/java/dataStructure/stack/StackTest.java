@@ -1,6 +1,8 @@
-package implementation;
+package dataStructure.stack;
 
 import org.junit.Test;
+
+import dataStructure.stack.Stack;
 
 public class StackTest {
 

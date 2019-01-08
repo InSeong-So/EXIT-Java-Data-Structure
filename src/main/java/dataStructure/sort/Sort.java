@@ -1,4 +1,4 @@
-package implementation;
+package dataStructure.sort;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

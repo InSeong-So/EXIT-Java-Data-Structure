@@ -1,6 +1,8 @@
-package implementation;
+package dataStructure.dfs_bfs;
 
 import java.util.Stack;
+
+import dataStructure.queue.Queue;
 
 public class DFS_BFS {
 

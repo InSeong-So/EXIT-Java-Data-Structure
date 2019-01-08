@@ -1,4 +1,4 @@
-package implementation;
+package dataStructure.sort;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import implementation.Sort;
+import dataStructure.sort.Sort;
 
 public class SortTest {
 	int[] numbers = { 4, 7, 1, 6, 3, 5, 4 };

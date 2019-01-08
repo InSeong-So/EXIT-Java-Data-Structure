@@ -1,6 +1,8 @@
-package implementation;
+package dataStructure.linkedlist;
 
 import org.junit.Test;
+
+import dataStructure.linkedlist.LinkedList;
 
 public class LinkedListTest {
 

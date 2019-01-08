@@ -1,6 +1,8 @@
-package implementation;
+package dataStructure.queue;
 
 import org.junit.Test;
+
+import dataStructure.queue.Queue;
 
 public class QueueTest {
 

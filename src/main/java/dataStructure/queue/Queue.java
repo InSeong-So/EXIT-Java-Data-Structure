@@ -1,4 +1,4 @@
-package implementation;
+package dataStructure.queue;
 
 import java.util.NoSuchElementException;
 

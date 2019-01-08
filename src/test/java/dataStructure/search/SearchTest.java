@@ -1,11 +1,11 @@
-package implementation;
+package dataStructure.search;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
 
-import implementation.Search;
-import implementation.SortTest;
+import dataStructure.search.Search;
+import dataStructure.sort.SortTest;
 
 public class SearchTest {
 
