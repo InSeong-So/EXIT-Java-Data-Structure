@@ -9,11 +9,8 @@
 > 인스턴스가 1개밖에 존재하지 않는 것을 프로그램 상에 표현하고 싶을 때
 이처럼 "인스턴스가 한 개밖에 존재지 않음을 보증"하는 패턴을 싱글톤 패턴이라 한다.
 
-┌────────────┐
-│ Singletone │
-├────────────┤
-├ -singleton ┤
-├────────────┤
-│ -Singleton │
-│+getInstance│
-└────────────┘
+## 클래스 다이어그램
+Singletone(클래스 명)
+-singleton(객체 선언부)
+-Singleton(private 생성자)
++getInstance(static 메소드)
