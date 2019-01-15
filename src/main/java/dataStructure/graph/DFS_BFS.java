@@ -1,4 +1,4 @@
-package dataStructure.dfs_bfs;
+package dataStructure.graph;
 
 import java.util.Stack;
 
