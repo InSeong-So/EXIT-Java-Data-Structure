@@ -1,4 +1,4 @@
-## LinkedList
+## HashTable
 
 ### 정리
 ```sh
