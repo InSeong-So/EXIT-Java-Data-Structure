@@ -4,16 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
 
-import dataStructure.search.Search;
-import dataStructure.sort.SortTest;
+import searchAlgorithm.binarySearch.BinarySearch1;
+import sortingAlgorithm.quickSort.QuickSortTest;
 
 public class SearchTest {
 
 	@Test
 	public void binarySearchTest() {
-		Search search = new Search();
+		BinarySearch1 binarySearch1 = new BinarySearch1();
 
-		assertEquals(true, search.binarySearch(SortTest.sortingList, 3));
+		assertEquals(true, binarySearch1.binarySearch(QuickSortTest.sortingList, 3));
 
 	}
 }
