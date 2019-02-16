@@ -1,9 +1,58 @@
 package sortingAlgorithm.mergeSort;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MergeSort1 {
+
+	// 병합 정렬 알고리즘
+	public static int[] mergeSort(int[] numbers) {
+		if (numbers.length < 2) {
+			return numbers;
+		}
+
+		int[] leftArray = Arrays.copyOfRange(numbers, 0, numbers.length / 2);
+		int[] rightArray = Arrays.copyOfRange(numbers, numbers.length / 2, numbers.length);
+		return merge(mergeSort(leftArray), mergeSort(rightArray));
+	}
+
+	// 병합
+	private static int[] merge(int[] left, int[] right) {
+		int leftPtr = 0;
+		int rightPtr = 0;
+		int index = 0;
+
+		int[] merged = new int[left.length + right.length];
+
+		while (leftPtr < left.length && rightPtr < right.length) {
+			if (left[leftPtr] < right[rightPtr]) {
+				merged[index] = left[leftPtr];
+				leftPtr++;
+				index++;
+			} else {
+				merged[index] = right[rightPtr];
+				rightPtr++;
+				index++;
+			}
+		}
+
+		while (leftPtr < left.length) {
+			merged[index] = left[leftPtr];
+			leftPtr++;
+			index++;
+		}
+
+		while (rightPtr < right.length) {
+			merged[index] = right[rightPtr];
+			rightPtr++;
+			index++;
+		}
+
+		return merged;
+	}
+
+	/***************************************************************************/
 
 	// 병합 정렬 알고리즘
 	public static List<Integer> mergeSort(List<Integer> values) {

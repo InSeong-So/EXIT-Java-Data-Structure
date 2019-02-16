@@ -3,7 +3,7 @@ package sortingAlgorithm.quickSort;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuickSort {
+public class QuickSort1 {
 
 	// 퀵 정렬 알고리즘
 	public static List<Integer> quickSort(List<Integer> numbers) {

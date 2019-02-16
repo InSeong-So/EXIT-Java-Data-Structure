@@ -1,13 +1,12 @@
 package sortingAlgorithm.quickSort;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
-
-import sortingAlgorithm.quickSort.QuickSort;
 
 public class QuickSortTest {
 	int[] numbers = { 4, 7, 1, 6, 3, 5, 4 };
@@ -17,6 +16,7 @@ public class QuickSortTest {
 
 	@Test
 	public void quickSortTest() {
-		assertEquals(sortingList, QuickSort.quickSort(numbersList));
+		assertEquals(sortingList, QuickSort1.quickSort(numbersList));
+		assertArrayEquals(afterSorting, QuickSort2.quickSort(numbers, 0, numbers.length - 1));
 	}
 }
