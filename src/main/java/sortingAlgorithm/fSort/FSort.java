@@ -25,7 +25,7 @@ public class FSort {
 				max = x[i];
 			}
 
-			fSort(x, nx, max);
+			fSort(x, max);
 
 			System.out.println("오름차순 정렬 결과");
 		}
@@ -34,23 +34,23 @@ public class FSort {
 		}
 	}
 
-	static void fSort(int[] a, int n, int max) {
+	static void fSort(int[] a, int max) {
 		int[] f = new int[max + 1];
-		int[] b = new int[n];
-		// 1단계
-		for (int i = 0; i < n; i++) {
+		int[] b = new int[a.length];
+		// 1단계 도수분포표 만들기
+		for (int i = 0; i < a.length; i++) {
 			f[a[i]]++;
 		}
-		// 2단계
+		// 2단계 누적도수분포표 만들기
 		for (int i = 1; i <= max; i++) {
 			f[i] += f[i - 1];
 		}
-		// 3단계
-		for (int i = n - 1; i >= 0; i--) {
+		// 3단계 목적 배열 만들기
+		for (int i = a.length - 1; i >= 0; i--) {
 			b[--f[a[i]]] = a[i];
 		}
-		// 4단계
-		for (int i = 0; i < n; i++) {
+		// 4단계 배열 복사하기
+		for (int i = 0; i < a.length; i++) {
 			a[i] = b[i];
 		}
 	}
