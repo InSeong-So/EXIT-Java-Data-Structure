@@ -1,193 +1,117 @@
 package searchAlgorithm.trieSearch;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Trie {
-
+public class Trie
+{
     private TrieNode root;
-
-    /* Constructor */
-    public Trie() {
-        root = new TrieNode('\u0000');  //루트 노트생성.
+    
+    public Trie()
+    {
+        root = new TrieNode();
     }
-
-    public void insert(String word) {
-        if (search(word) == true) return;
+    
+    public void insert(String keyword, Integer seed)
+    {
         TrieNode current = root;
-
-        for (char ch : word.toCharArray()) {
-            TrieNode child = current.subNode(ch);
-            if (child != null) {
-                current = child;
-            } else {
-                current.childList.add(new TrieNode(ch));
-                current = current.subNode(ch);
+        
+        for (int i = 0; i < keyword.length(); i++)
+        {
+            current = current.getChildren().computeIfAbsent(keyword.charAt(i), c -> new TrieNode());
+        }
+        current.setEndOfWord(true);
+        current.setContentKey(seed);
+    }
+    
+    public boolean delete(String keyword)
+    {
+        return delete(root, keyword, 0);
+    }
+    
+    public boolean containsNode(String query)
+    {
+        TrieNode current = root;
+        
+        for (int i = 0; i < query.length(); i++)
+        {
+            char ch = query.charAt(i);
+            TrieNode node = current.getChildren().get(ch);
+            if (node == null)
+            {
+                return false;
             }
-            current.count++;
+            current = root;
         }
-        current.terminal = true;
+        return current.isEndOfWord();
     }
-
-    public boolean search(String word) {
-        TrieNode current = root;
-
-        //문자열을 문자 배열로 쪼개서 차례대로 비교
-        for (char ch : word.toCharArray()) {
-            if (current.subNode(ch) == null) return false; //해당 문자의 노드가 없으면 false리턴
-            else current = current.subNode(ch);//해당 문자가 존재하면 현재 노드에
-            //서브 노드 저장해서 단계별로 내려감
+    
+    public boolean isEmpty()
+    {
+        return root == null;
+    }
+    
+    private boolean delete(TrieNode current, String query, int index)
+    {
+        if (index == query.length())
+        {
+            if (!current.isEndOfWord())
+            {
+                return false;
+            }
+            current.setEndOfWord(false);
+            return current.getChildren().isEmpty();
         }
-        if (current.terminal == true) return true; //현재 노드가 단어의 끝인지 검사
-
+        char ch = query.charAt(index);
+        TrieNode node = current.getChildren().get(ch);
+        if (node == null)
+        {
+            return false;
+        }
+        
+        boolean shouldDeleteCurrentNode = delete(node, query, index + 1) && !node.isEndOfWord();
+        
+        if (shouldDeleteCurrentNode)
+        {
+            current.getChildren().remove(ch);
+            return current.getChildren().isEmpty();
+        }
+        
         return false;
     }
-
-    public void remove(String word) {
-        if (search(word) == false) {
-            System.out.println(word + "는 존재하지 않는 문자열입니다.\n");
-            return;
+    
+    class TrieNode
+    {
+        private Map<Character, TrieNode> children = new HashMap<>();
+        
+        private boolean endOfWord;
+        
+        private Integer contentKey;
+        
+        public Map<Character, TrieNode> getChildren()
+        {
+            return children;
         }
-        TrieNode current = root;
-        for (char ch : word.toCharArray()) {
-            TrieNode child = current.subNode(ch);
-            if (child.count == 1) {
-                current.childList.remove(child);
-                return;
-            } else {
-                child.count--;
-                current = child;
-            }
+        
+        public boolean isEndOfWord()
+        {
+            return isEndOfWord();
         }
-        current.terminal = false;
-    }
-
-    public Iterator<String> iterator() {
-        Set<String> elementsInTrie = new TreeSet<String>();
-
-        recursiveCallPrint(root, "", elementsInTrie); // 저장된 데이터를 elementsInTrie에 저장
-        Iterator<String> elementsInTrieSet = elementsInTrie.iterator();
-
-        return elementsInTrieSet;
-    }
-
-    private void recursiveCallPrint(TrieNode currNode, String key, Set<String> elementsInTrie) {
-        // adding only the words
-        if (currNode.terminal) {
-            elementsInTrie.add(key);
+        
+        public void setEndOfWord(boolean endOfWord)
+        {
+            this.endOfWord = endOfWord;
         }
-
-        LinkedList<TrieNode> children = currNode.childList;
-        Iterator<TrieNode> childIter = children.iterator();
-
-        String sKey = key;
-
-        while (childIter.hasNext()) {
-            TrieNode nextNode = childIter.next();
-            // 문자열 합치기 (키+문자)
-            String s = sKey + nextNode.nodeChar;
-            // 재귀 호출 (다음 노드, 키값, 저장셋)
-            recursiveCallPrint(nextNode, s, elementsInTrie);
+        
+        public Integer getContentKey()
+        {
+            return contentKey;
+        }
+        
+        public void setContentKey(Integer contentKey)
+        {
+            this.contentKey = contentKey;
         }
     }
-
-    public void printWord() {
-
-        System.out.println("▶Elements in the TRIE are :");
-
-        Iterator<String> itr = iterator();
-        while (itr.hasNext()) {
-            System.out.println(itr.next());
-        }
-        System.out.println("===================");
-    }
-
+    
 }
-
-
-class TrieNode implements Comparable<TrieNode> {
-
-    char nodeChar; //문자저장
-    boolean terminal; //리프 노드 여부
-    int count; //카운드 (해당노드 사용수)
-    LinkedList<TrieNode> childList; //자식 노드 리스트
-
-
-    /* Constructor */
-    public TrieNode(char c) {
-        childList = new LinkedList<TrieNode>();
-        terminal = false;
-        nodeChar = c;
-        count = 0;
-    }
-
-    boolean isTerminal() {
-        return terminal;
-    }
-
-    //해당 노드가 가지고 있는  자식 노드들에서 입력받은 문자가 있는지 검사
-    public TrieNode subNode(char nextChar) {
-
-        //System.out.println("subNode: "+nextChar);
-        //System.out.println("subNode: "+childList);
-
-        //Type1. 순차 검색.
-        if (childList != null) {
-            for (TrieNode eachChild : childList)
-                if (eachChild.nodeChar == nextChar)
-                    return eachChild;
-        }
-
-        return null;
-
-
-        //Type2.
-        //이분검색(binary search) 알고리즘 적용 (childrenList의 요소가 정렬된 상태여야함)
-
-        //리스트에 들어있는 데이터 정렬.
-        //Collections.sort(childList);
-        //System.out.println(childList);
-
-        /*
-        int min= 0;
-        int max= childList.size() - 1;
-        int mid= 0;
-        while (min < max) {
-            mid = (min + max) / 2;
-            if (childList.get(mid).nodeChar == nextChar)
-                return childList.get(mid);
-            if (childList.get(mid).nodeChar < nextChar)
-                min = mid + 1;
-            else
-                // if (children[mid].nodeChar > nextChar)
-                max = mid - 1;
-        }
-        if (min == max)
-            if (childList.get(min).nodeChar == nextChar)
-                return childList.get(min);
-
-        return null;
-        */
-    }//subNode()
-
-
-    @Override
-    public int compareTo(TrieNode o) { // 비교기준 정의
-        TrieNode other = o;
-        if (this.nodeChar < other.nodeChar)
-            return -1;
-        if (this.nodeChar == other.nodeChar)
-            return 0;
-        // if (this.nodeChar > other.nodeChar)
-        return 1;
-    }// compareTo()
-
-
-    @Override
-    public String toString() {
-        return this.nodeChar + "(" + this.terminal + ") ";
-    }//toString()
-
-}//End Class TrieNode
